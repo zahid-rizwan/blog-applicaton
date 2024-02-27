@@ -1,8 +1,9 @@
 import React from 'react'
+import LogIn from './LogIn'
 
 const Blog = () => {
   return (
-    <div>Blog</div>
+    <div><LogIn/></div>
   )
 }
 

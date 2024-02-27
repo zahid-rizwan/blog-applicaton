@@ -35,9 +35,10 @@ const Navbar = () => {
              */}
              <div className="text-white lg:flex gap-4 items-center hidden">
               <a href="/" className='hover:text-orange-500'><FaFacebook/></a>
-              <a href="/" className='hover:text-orange-500'><FaFacebook/></a>
               <a href="/" className='hover:text-orange-500'><FaXTwitter /></a>
-              <button className='bg-blue-500 px-6 py-2 font-medium rounded hover:bg-green-600 transition-all duration-200 ease-in'>Log in</button>
+              <NavLink to={"/signup"}><button className='bg-blue-500 px-6 py-2 font-medium rounded hover:bg-green-600 transition-all duration-200 ease-in'>Sign up</button></NavLink>
+
+              <NavLink to={"/login"}><button className='bg-blue-500 px-6 py-2 font-medium rounded hover:bg-green-600 transition-all duration-200 ease-in'>Log in</button></NavLink>
              </div>
              <div className='md:hidden'>
                 <button onClick={toggleMenu} className='cursor-pointer'>
