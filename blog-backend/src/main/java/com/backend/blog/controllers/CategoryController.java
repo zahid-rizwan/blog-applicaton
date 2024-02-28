@@ -26,7 +26,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
     @PostMapping("/")
-    public ResponseEntity<CategoryDto> createUsser(@Valid @RequestBody CategoryDto categoryDto){
+    public ResponseEntity<CategoryDto> createUser(@Valid @RequestBody CategoryDto categoryDto){
         CategoryDto createCategoryDto = this.categoryService.createCategory(categoryDto);
         return new  ResponseEntity<>(createCategoryDto,HttpStatus.CREATED);
     }
