@@ -3,7 +3,6 @@ package com.backend.blog.services;
 
 import java.util.List;
 
-import com.backend.blog.entities.Post;
 import com.backend.blog.payloads.PostDto;
 
 public interface PostService {
@@ -13,7 +12,7 @@ public interface PostService {
 
     PostDto getPostById(Integer id);
 
-    List<PostDto> getAllPosts();
+    List<PostDto> getAllPosts(Integer pageNumber,int pageSize);
 
     void deletePost(Integer postId);
     List<PostDto> getPostsByCategory(Integer categoryId);
