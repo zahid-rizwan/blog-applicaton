@@ -4,6 +4,7 @@ package com.backend.blog.services;
 import java.util.List;
 
 import com.backend.blog.payloads.PostDto;
+import com.backend.blog.payloads.PostResponse;
 
 public interface PostService {
     PostDto createPost(PostDto postDto,Integer userId,Integer categoryId);
@@ -12,7 +13,7 @@ public interface PostService {
 
     PostDto getPostById(Integer id);
 
-    List<PostDto> getAllPosts(Integer pageNumber,int pageSize);
+    PostResponse getAllPosts(Integer pageNumber,Integer pageSize,String sortBy);
 
     void deletePost(Integer postId);
     List<PostDto> getPostsByCategory(Integer categoryId);
