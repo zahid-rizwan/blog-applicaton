@@ -33,7 +33,7 @@ public class PostController {
     private PostService postService;
     @Autowired
     private FileService fileService;
-    @Value("${project.images}")
+    @Value("${project.image}")
     private String path;
     @PostMapping("/user/{userId}/category/{categoryId}/posts")
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto,
@@ -95,8 +95,11 @@ public class PostController {
     )  throws IOException{
         PostDto postDto = this.postService.getPostById(postId);
         String fileName = this.fileService.uploadImage(path, image);
+        System.out.println(fileName);
        postDto.setImageName(fileName);
+       
        PostDto updatedPost = this.postService.updatePost(postDto, postId);
+       System.out.println(updatedPost.getImageName());
        return new ResponseEntity<PostDto>(updatedPost,HttpStatus.OK);
 
     }
