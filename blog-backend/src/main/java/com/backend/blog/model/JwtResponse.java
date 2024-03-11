@@ -1,4 +1,6 @@
-package com.backend.blog.security;
+package com.backend.blog.model;
+
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +11,12 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @ToString
+@Component
 public class JwtResponse {
     private String jwtToken;
     private String username;
-
 }

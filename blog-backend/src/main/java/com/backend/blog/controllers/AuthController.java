@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.blog.model.JwtRequest;
+import com.backend.blog.model.JwtResponse;
 import com.backend.blog.security.JwtHelper;
-import com.backend.blog.security.JwtRequest;
-import com.backend.blog.security.JwtResponse;
+
+
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/auth")
 public class AuthController {
     @Autowired
     private UserDetailsService userDetailsService;
@@ -38,7 +40,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
-
+        System.out.println("this is a error");
         this.doAuthenticate(request.getEmail(), request.getPassword());
 
 

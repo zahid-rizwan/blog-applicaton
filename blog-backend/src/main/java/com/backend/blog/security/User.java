@@ -1,7 +1,6 @@
 package com.backend.blog.security;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,9 +10,9 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @ToString
-public class JwtRequest {
+public class User {
+    private String userId;
+    private String name;
     private String email;
-    private String password;
 }
