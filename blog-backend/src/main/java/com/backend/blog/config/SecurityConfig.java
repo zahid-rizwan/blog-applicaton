@@ -34,7 +34,6 @@ public class SecurityConfig {
             .cors((cors)->cors.disable())
             .authorizeHttpRequests((auth)->
                 auth.requestMatchers("auth/login").permitAll()
-                .requestMatchers("/api/users/").permitAll()
                 .anyRequest().authenticated())
             .exceptionHandling((ex)->ex.authenticationEntryPoint(point))
             .sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); 
