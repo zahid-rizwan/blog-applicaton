@@ -13,6 +13,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +29,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @PostMapping("/")
     public ResponseEntity<UserDto> createUsser(@Valid @RequestBody UserDto userDto){
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         UserDto createUserDto = this.userService.createUser(userDto);
         return new  ResponseEntity<>(createUserDto,HttpStatus.CREATED);
     }
@@ -36,6 +41,7 @@ public class UserController {
     public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto ,@PathVariable("userId") Integer userId){
         return ResponseEntity.ok(this.userService.updateUser(userDto, userId));
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable("userId") Integer userId){
         this.userService.deleteUser(userId);

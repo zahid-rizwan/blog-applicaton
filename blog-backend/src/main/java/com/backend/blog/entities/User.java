@@ -31,6 +31,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class User implements UserDetails {
+// public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

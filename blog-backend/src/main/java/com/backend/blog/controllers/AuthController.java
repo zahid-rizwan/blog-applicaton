@@ -40,7 +40,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
-        System.out.println("this is a error");
         this.doAuthenticate(request.getEmail(), request.getPassword());
 
 
