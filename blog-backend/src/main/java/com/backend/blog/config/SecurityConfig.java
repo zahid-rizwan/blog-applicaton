@@ -3,6 +3,7 @@ package com.backend.blog.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -33,7 +34,8 @@ public class SecurityConfig {
         http.csrf((csrf)->csrf.disable())
             .cors((cors)->cors.disable())
             .authorizeHttpRequests((auth)->
-                auth.requestMatchers("auth/login").permitAll()
+                auth.requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated())
             .exceptionHandling((ex)->ex.authenticationEntryPoint(point))
             .sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); 
