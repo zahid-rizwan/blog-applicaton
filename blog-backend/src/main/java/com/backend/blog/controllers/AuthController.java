@@ -22,6 +22,8 @@ import com.backend.blog.payloads.UserDto;
 import com.backend.blog.security.JwtHelper;
 import com.backend.blog.services.UserService;
 
+import jakarta.validation.Valid;
+
 
 
 @RestController
@@ -75,7 +77,7 @@ public class AuthController {
         return "Credentials Invalid !!";
     }
     @PostMapping("/register")
-    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserDto userDto){
         UserDto registerdUser = this.userService.registerNewUser(userDto);
         return new ResponseEntity<UserDto>(registerdUser,HttpStatus.CREATED);
     }

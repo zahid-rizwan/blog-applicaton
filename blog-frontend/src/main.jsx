@@ -13,6 +13,7 @@ import Contact from './pages/Contact.jsx';
 import Services from './pages/Services.jsx';
 import LogIn from './pages/LogIn.jsx';
 import SignUp from './pages/SignUp.jsx';
+import { ToastContainer } from 'react-toastify';
 
 const router = createHashRouter([ // Use createHashRouter instead of createBrowserRouter
   {
@@ -53,6 +54,7 @@ const router = createHashRouter([ // Use createHashRouter instead of createBrows
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <ToastContainer/>
     <RouterProvider router={router} />
   </React.StrictMode>
 );
