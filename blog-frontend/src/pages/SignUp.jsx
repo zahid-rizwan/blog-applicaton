@@ -15,12 +15,15 @@ const SignUp = () => {
 
   const submitForm = (event) => {
     event.preventDefault();
+    if (error.isError) {
+      toast.error("form Data is invalid !!");
+      setError({...error,isError:false})
+      return;
+    }
     console.log(data);
     signup(data)
       .then((resp) => {
-        console.log(resp);
-        console.log("success");
-        toast.success("User register Successfully");
+        toast.success("User register Successfully user id " + resp.id);
         setData({
           name: "",
           email: "",
@@ -28,9 +31,16 @@ const SignUp = () => {
           about: "",
         });
       })
-      .catch(() => {
-        console.log(error);
+      .catch((error) => {
+        console.log(error)
         console.log("Error log");
+       
+        setError({
+          errors:error,
+          isError:true
+        })
+        
+        
       });
   };
   //   useEffect(()=>{
@@ -66,6 +76,9 @@ const SignUp = () => {
                     value={data.name}
                     required=""
                   />
+                  <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                    {error.errors?.response?.data.name}
+                  </span>
                 </div>
                 <div>
                   <label
@@ -84,6 +97,10 @@ const SignUp = () => {
                     value={data.email}
                     required=""
                   />
+                  <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                  {error.errors?.response?.data.email}
+
+                  </span>
                 </div>
                 <div>
                   <label
@@ -102,6 +119,9 @@ const SignUp = () => {
                     required=""
                     value={data.password}
                   />
+                  <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                  {error.errors?.response?.data.password}
+                  </span>
                 </div>
                 <div>
                   <label
