@@ -1,5 +1,6 @@
 package com.backend.blog.controllers;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.blog.entities.User;
 import com.backend.blog.model.JwtRequest;
 import com.backend.blog.model.JwtResponse;
 import com.backend.blog.payloads.UserDto;
@@ -40,6 +42,8 @@ public class AuthController {
 
     @Autowired
     private JwtHelper helper;
+    @Autowired
+    private ModelMapper modelMapper;
 
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
@@ -52,10 +56,9 @@ public class AuthController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = this.helper.generateToken(userDetails);
         System.out.println(token);
-
         JwtResponse response = JwtResponse.builder()
                 .jwtToken(token)
-                .username(userDetails.getUsername()).build();
+                .user(this.modelMapper.map((User)userDetails, UserDto.class)).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
