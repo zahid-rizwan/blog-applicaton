@@ -51,14 +51,15 @@ const router = createHashRouter([ // Use createHashRouter instead of createBrows
         element:<SignUp/>
       },
       
+      
     ]
   },
   {
-    path:"/private",
+    path:"/user",
     element:<PrivateRoute/>,
     children:[
       {
-        path:"/private/dashboard",
+        path:"/user/dashboard",
         element:<DashBoard/>
       }
     ]

@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { login } from "../services/user-service";
 import { doLogin } from "../auth";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const [loginDetail, setLoginDeatail] = useState({
     email: "",
     password: "",
   });
+  const navigate=useNavigate()
   const handleOnChange = (event, field) => {
     setLoginDeatail({
       ...loginDetail,
@@ -27,6 +29,7 @@ const LogIn = () => {
             console.log(data)
             doLogin(data,()=>{
               console.log("login details is saved")
+              navigate("/user/dashboard")
             })
             toast.success("login success")
        }).catch((error)=>{
