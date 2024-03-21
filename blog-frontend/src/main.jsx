@@ -14,6 +14,8 @@ import Services from './pages/Services.jsx';
 import LogIn from './pages/LogIn.jsx';
 import SignUp from './pages/SignUp.jsx';
 import { ToastContainer } from 'react-toastify';
+import DashBoard from './pages/DashBoard.jsx';
+import PrivateRoute from './pages/PrivateRoute.jsx';
 
 const router = createHashRouter([ // Use createHashRouter instead of createBrowserRouter
   {
@@ -47,9 +49,20 @@ const router = createHashRouter([ // Use createHashRouter instead of createBrows
       {
         path:"/signup",
         element:<SignUp/>
-      }
+      },
+      
     ]
   },
+  {
+    path:"/private",
+    element:<PrivateRoute/>,
+    children:[
+      {
+        path:"/private/dashboard",
+        element:<DashBoard/>
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
