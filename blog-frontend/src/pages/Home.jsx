@@ -1,15 +1,20 @@
-import React from "react";
+// import React from "react";
 import Banner from "../components/Banner";
-import BlogPage from "../components/BlogPage";
+import NewFeed from "../components/NewFeed";
+
+// import BlogPage from "../components/BlogPage";
 
 const Home = () => {
-    console.log("hello")
+  
   return (
     <div>
       <Banner />
-      <div className="max-w-7xl mx-auto">
+   
+      <NewFeed />
+   
+      {/* <div className="max-w-7xl mx-auto">
         <BlogPage />
-      </div>
+      </div> */}
     </div>
   );
 };

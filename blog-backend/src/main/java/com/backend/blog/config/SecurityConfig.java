@@ -83,6 +83,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source =new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
         FilterRegistrationBean bean=new FilterRegistrationBean<>(new CorsFilter(source));
+        bean.setOrder(-110);
         return bean;
     }
 }
