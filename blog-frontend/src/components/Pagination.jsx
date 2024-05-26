@@ -1,26 +1,56 @@
-// import React from 'react'
-
-// const Pagination = ({onPageChange,currentPage, blogs,pageSize}) => {
-//     const totalPages = Math.ceil(blogs.length / pageSize);
-//     const renderPaginationLinks = () =>{
-//         return Array.from({length:totalPages},(_,i)=> i + 1).map((pageNumber)=>(
-//             <li className={pageNumber === currentPage ? "active-pagination":""} key={pageNumber}> 
-//                 <a href="#" onClick={()=> onPageChange(pageNumber)}>{pageNumber}</a>
-//             </li>
-//         ))
-//     }
-//   return (
-//     <ul className='pagination my-8 flex-wrap gap-4'>
-//         <li>
-//             <button onClick={()=> onPageChange(currentPage - 1)} disabled={currentPage == 1}>Previous</button>
-//         </li>
-//         <div className='flex gap-1'>{renderPaginationLinks()}</div>
-//         <li>
-//             <button onClick={()=> onPageChange(currentPage + 1)} disabled ={currentPage ==totalPages}>Next</button>
-//         </li>
-
-//     </ul>
-//   )
-// }
-// // 
-// export default Pagination
+import React from "react";
+import { Button, IconButton } from "@material-tailwind/react";
+// import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+ 
+export function Pagination({totalPages}) {
+  const [active, setActive] = React.useState(1);
+ 
+  const getItemProps = (index) =>
+    ({
+      variant: active === index ? "filled" : "text",
+      color: "gray",
+      onClick: () => setActive(index),
+    });
+    console.log(totalPages);
+  const next = () => {
+    if (active === 5) return;
+ 
+    setActive(active + 1);
+  };
+ 
+  const prev = () => {
+    if (active === 1) return;
+ 
+    setActive(active - 1);
+  };
+ 
+  return (
+    <div className="flex items-center gap-4">
+      <Button
+        variant="text"
+        className="flex items-center gap-2"
+        onClick={prev}
+        disabled={active === 1}
+      >
+        Previous
+        {/* <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous */}
+      </Button>
+      <div className="flex items-center gap-2">
+        <IconButton {...getItemProps(1)}>1</IconButton>
+        {/* <IconButton {...getItemProps(2)}>2</IconButton>
+        <IconButton {...getItemProps(3)}>3</IconButton>
+        <IconButton {...getItemProps(4)}>4</IconButton>
+        <IconButton {...getItemProps(5)}>5</IconButton> */}
+      </div>
+      <Button
+        variant="text"
+        className="flex items-center gap-2"
+        onClick={next}
+        disabled={active === 5}
+      >
+        Next
+        {/* <ArrowRightIcon strokeWidth={2} className="h-4 w-4" /> */}
+      </Button>
+    </div>
+  );
+}

@@ -8,7 +8,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 const Post = ({post}) => {
-  console.log('hello')
+
   return (
     <div className="grid grid-cols-1">
     <Card className="mt-10 w-96">
