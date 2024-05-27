@@ -17,7 +17,7 @@ const NewFeed = () => {
   });
 
   useEffect(() => {
-    loadAllPosts(0,5)
+    loadAllPosts(0,15)
       .then((data) => {
         console.log(data);
         setPostContent(data);
@@ -26,7 +26,7 @@ const NewFeed = () => {
         console.log(error);
       });
   }, []);
-  const changePage=(pageNumber=0,pageSize=5)=>{
+  const changePage=(pageNumber=0,pageSize=10)=>{
     loadAllPosts(pageNumber,pageSize).then((data)=>{
       setPostContent(data)
       setActive(pageNumber+1)
@@ -48,8 +48,8 @@ const NewFeed = () => {
   return (
     <div>
       <h1>Blog Count({postContent?.totalElements})</h1>
-      <div className="grid grid-cols-1 gap-5">
-        <div>
+      <div>
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
           {postContent.content.map((post,index) => (
             <Post post={post} key={index} />
           ))}
@@ -71,7 +71,7 @@ const NewFeed = () => {
             <IconButton 
             {...getItemProps(index+1)} 
             key={index}
-            onClick={()=>changePage(index,5) }
+            onClick={()=>changePage(index,10) }
             >{index + 1}</IconButton>
           ))
         }

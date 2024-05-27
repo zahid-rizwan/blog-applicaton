@@ -1,38 +1,27 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
-const Post = ({post}) => {
-
+import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa6";
+const Post = ({ post }) => {
   return (
-    <div className="grid grid-cols-1">
-    <Card className="mt-10 w-96">
-      <CardHeader color="blue-gray" className="relative h-56">
-        <img
-          src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-          alt="card-image"
-        />
-      </CardHeader>
-      <CardBody>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
-          {post.title}
-        </Typography>
-        <Typography>
-         {post.content.substring(0,20)}....
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button>Read More</Button>
-      </CardFooter>
-    </Card>
   
-    
-    </div>
+      <Link key={post.postId} className="p-5 shadow-lg rounded cursor-pointer">
+        <div>
+          <img alt="" src="https://img.freepik.com/free-vector/desktop-smartphone-app-development_23-2148683810.jpg?t=st=1716830203~exp=1716833803~hmac=22c79dfe6386f9e25f012f659fe23dff56e9172b0a4b1d8d58cbe15adda6f75a&w=740" className="w-full" />{" "}
+        </div>{" "}
+        <h3 className="mt-4 mb-2 font-bold hover:text-blue-600 cursor-pointer">
+          {post.title}
+        </h3>{" "}
+        <p className="mb-2  text-gray-600">
+          <FaUser className="inline-flex items-center mr-2" />
+        </p>
+        <p className=" text-sm text-gray-500">Published:</p>{" "}
+        {/* {post.title} */}
+
+      {/* {post.content.substring(0,20)}.... */}
+      </Link>
+
+      
+  
   );
 };
 
