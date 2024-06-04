@@ -23,7 +23,7 @@ const SignUp = () => {
     console.log(data);
     signup(data)
       .then((resp) => {
-        toast.success("User register Successfully user id " + resp.id);
+        toast.success("User register Successfully");
         setData({
           name: "",
           email: "",

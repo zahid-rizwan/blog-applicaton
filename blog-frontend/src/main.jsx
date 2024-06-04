@@ -15,6 +15,7 @@ import LogIn from './pages/LogIn.jsx';
 import SignUp from './pages/SignUp.jsx';
 import { ToastContainer } from 'react-toastify';
 import DashBoard from './pages/DashBoard.jsx';
+import PostPage from './components/PostPage.jsx';
 
 const router = createHashRouter([ // Use createHashRouter instead of createBrowserRouter
   {
@@ -48,6 +49,10 @@ const router = createHashRouter([ // Use createHashRouter instead of createBrows
       {
         path:"/signup",
         element:<SignUp/>
+      },
+      {
+        path:"/post/:postId",
+        element:<PostPage/>
       },
       
       

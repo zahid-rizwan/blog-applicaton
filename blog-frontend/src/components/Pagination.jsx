@@ -1,55 +1,56 @@
 import React from "react";
+import { loadAllPosts } from "../services/psot-service";
+import { useState } from "react";
+import { toast } from "react-toastify";
 import { Button, IconButton } from "@material-tailwind/react";
-// import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
- 
-export function Pagination({totalPages}) {
-  const [active, setActive] = React.useState(1);
- 
-  const getItemProps = (index) =>
-    ({
-      variant: active === index ? "filled" : "text",
-      color: "gray",
-      onClick: () => setActive(index),
-    });
-    console.log(totalPages);
-  const next = () => {
-    if (active === 5) return;
- 
-    setActive(active + 1);
-  };
- 
-  const prev = () => {
-    if (active === 1) return;
- 
-    setActive(active - 1);
-  };
- 
+
+
+export function Pagination({postContent,setPostContent}) {
+  console.log("pagination")
+  const [active, setActive] = useState(1);
+  const changePage=(pageNumber=0,pageSize=10)=>{
+    loadAllPosts(pageNumber,pageSize).then((data)=>{
+      setPostContent(data)
+      setActive(pageNumber+1)
+    }).catch(error=>{
+      toast.error("Error in loading posts")
+    })
+  }
+
+  const getItemProps = (index) => ({
+    variant: active === index ? "filled" : "text",
+    color: "gray",
+    onClick: () => setActive(index),
+  });
+
   return (
     <div className="flex items-center gap-4">
       <Button
         variant="text"
         className="flex items-center gap-2"
-        onClick={prev}
-        disabled={active === 1}
+        onClick={() => changePage(--postContent.pageNumber)}
+        disabled={postContent.pageNumber == 0}
       >
         Previous
-        {/* <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous */}
       </Button>
       <div className="flex items-center gap-2">
-        <IconButton {...getItemProps(1)}>1</IconButton>
-        {/* <IconButton {...getItemProps(2)}>2</IconButton>
-        <IconButton {...getItemProps(3)}>3</IconButton>
-        <IconButton {...getItemProps(4)}>4</IconButton>
-        <IconButton {...getItemProps(5)}>5</IconButton> */}
+        {[...Array(postContent.totalPages)].map((item, index) => (
+          <IconButton
+            {...getItemProps(index + 1)}
+            key={index}
+            onClick={() => changePage(index, 10)}
+          >
+            {index + 1}
+          </IconButton>
+        ))}
       </div>
       <Button
         variant="text"
         className="flex items-center gap-2"
-        onClick={next}
-        disabled={active === 5}
+        onClick={() => changePage(++postContent.pageNumber)}
+        disabled={postContent.lastPage}
       >
         Next
-        {/* <ArrowRightIcon strokeWidth={2} className="h-4 w-4" /> */}
       </Button>
     </div>
   );
