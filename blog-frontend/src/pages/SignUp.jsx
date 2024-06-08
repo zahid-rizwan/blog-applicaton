@@ -20,9 +20,10 @@ const SignUp = () => {
       setError({...error,isError:false})
       return;
     }
-    console.log(data);
+    
     signup(data)
       .then((resp) => {
+        console.log(data);
         toast.success("User register Successfully");
         setData({
           name: "",

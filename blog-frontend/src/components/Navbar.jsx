@@ -8,7 +8,7 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  let navigate=useNavigate();
+  let navigate = useNavigate();
   const navItems = [
     { path: "/", link: "Home" },
     { path: "/services", link: "Services" },
@@ -23,10 +23,10 @@ const Navbar = () => {
     setUser(getCurrentUser());
   }, [login]);
   const logout = () => {
-    doLogout(()=>{
-      setLogin(false)
-      navigate("/")
-    })
+    doLogout(() => {
+      setLogin(false);
+      navigate("/");
+    });
   };
   return (
     <header className="bg-black z-10 text-white fixed top-0 left-0 right-0">
@@ -62,7 +62,10 @@ const Navbar = () => {
           {login && (
             <>
               <NavLink to={"/"}>
-                <button className="bg-blue-500 px-6 py-2 font-medium rounded hover:bg-green-600 transition-all duration-200 ease-in" onClick={logout}>
+                <button
+                  className="bg-blue-500 px-6 py-2 font-medium rounded hover:bg-green-600 transition-all duration-200 ease-in"
+                  onClick={logout}
+                >
                   Log out
                 </button>
               </NavLink>
@@ -110,6 +113,36 @@ const Navbar = () => {
               </NavLink>
             </li>
           ))}
+          <li>
+            {login && (
+              <>
+                <NavLink to={"/"}>
+                  <button
+                    className="bg-blue-500 px-6 py-2 font-medium rounded hover:bg-green-600 transition-all duration-200 ease-in"
+                    onClick={logout}
+                  >
+                    Log out
+                  </button>
+                </NavLink>
+                {user.email}
+              </>
+            )}
+            {!login && (
+              <>
+                <NavLink to={"/signup"}>
+                  <button className="bg-blue-500 mx-1 px-6 py-2 font-medium rounded hover:bg-green-600 transition-all duration-200 ease-in">
+                    Sign up
+                  </button>
+                </NavLink>
+
+                <NavLink to={"/login"}>
+                  <button className="bg-blue-500 px-6 py-2 font-medium rounded hover:bg-green-600 transition-all duration-200 ease-in">
+                    Log in
+                  </button>
+                </NavLink>
+              </>
+            )}
+          </li>
         </ul>
       </div>
     </header>

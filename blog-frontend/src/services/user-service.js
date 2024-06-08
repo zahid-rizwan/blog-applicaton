@@ -1,6 +1,7 @@
 // import axios from "axios";
 import { myAxios } from "./helper";
 export const signup=async(user)=>{
+    console.log(user)
     return myAxios.post('/api/auth/register',user)
     .then((response)=>response.data)
     // try{
