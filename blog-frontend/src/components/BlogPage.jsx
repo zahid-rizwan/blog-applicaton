@@ -12,28 +12,9 @@ import { loadAllPosts } from "../services/psot-service";
 import { useState, useEffect } from "react";
 import { Pagination } from "./Pagination";
 const BlogPage = () => {
-  //   const [blogs, setBlogs] = useState(null);
-  //   const [currentPage, setCurrentPage] = useState(1);
-  //   const pageSize = 12;
-  //   const [selectedCategory, setSelectedCategory] = useState(null);
-  //   const [activeCategory, setActiveCategory] = useState(null);
-  //   useEffect(()=>{
-  //     loadAllPosts().then((data)=>{
-  //       setBlogs(data)
-  //     }).catch(error=>{
-  //       console.log(error);
-  //     })
-  //   },[])
-  //   const handlePageChange = (pageNumber) => {
-  //     setCurrentPage(pageNumber);
-  //   };
-  //   const handleCategoryChange = (category) => {
-  //     setSelectedCategory(category);
-  //     setCurrentPage(1);
-  //     setActiveCategory(category);
+  const [currentPage,setCurrentPage] = useState(0);
+  const [active, setActive] = useState(1);
 
-  //   };
- 
   const [postContent, setPostContent] = useState({
     content: [],
     totalPages: "",
@@ -43,8 +24,38 @@ const BlogPage = () => {
     pageNumber: "",
   });
 
+
+
+  useEffect(()=>{
+    changePage(currentPage)
+  },[currentPage])
+  const changePage=(pageNumber=0,pageSize=10)=>{
+
+    loadAllPosts(pageNumber,pageSize).then((data)=>{
+      setPostContent({
+        content: [...postContent.content,...data.content],
+        totalPages: data.totalPages,
+        totalElements: data.totalElements,
+        pageSize: data.pageSize,
+        lastPage: data.lastPage,
+        pageNumber: data.pageNumber,
+      })
+      setActive(pageNumber+1)
+    }).catch(error=>{
+      toast.error("Error in loading posts")
+    })
+  }
+
+  const getItemProps = (index) => ({
+    variant: active === index ? "filled" : "text",
+    color: "gray",
+    onClick: () => setActive(index),
+  });
+ 
+  
+
   useEffect(() => {
-    loadAllPosts(0, 15)
+    loadAllPosts(0, 2)
       .then((data) => {
         console.log(data);
         setPostContent(data);
@@ -67,6 +78,9 @@ const BlogPage = () => {
       <div className="flex flex-col lg:flex-row gap-8">
         <NewFeed
         postContent={postContent}
+        setPostContent={setPostContent}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
         />
         {/* <BlogCards
           blogs={blogs}

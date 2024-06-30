@@ -11,7 +11,6 @@ const Navbar = () => {
   let navigate = useNavigate();
   const navItems = [
     { path: "/", link: "Home" },
-    { path: "/services", link: "Services" },
     { path: "/about", link: "About" },
     { path: "/blogs", link: "Blog" },
     { path: "/contact", link: "Contact" },

@@ -107,13 +107,13 @@ public class PostController {
        return new ResponseEntity<PostDto>(updatedPost,HttpStatus.OK);
 
     }
-    @GetMapping(value = "/post/image/{imageName}",produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/post/image/{imageName}",produces = MediaType.IMAGE_JPEG_VALUE)
     public void downloadImage(
         @PathVariable("imageName") String imageName,
         HttpServletResponse response) throws IOException{
-            InputStream resources = this.fileService.getResources(path, imageName);
-            response.setContentType(MediaType.IMAGE_PNG_VALUE);
-            StreamUtils.copy(resources, response.getOutputStream());
+            InputStream resource = this.fileService.getResources(path, imageName);
+            response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+            StreamUtils.copy(resource, response.getOutputStream());
         }
 
 }

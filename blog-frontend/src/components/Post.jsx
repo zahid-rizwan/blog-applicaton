@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa6";
 const Post = ({ post }) => {
-  console.log(post.postId)
+  // console.log(post.user.name)
   return (
   
       <Link key={post.postId} to={'/post/' + post.id} className="p-5 shadow-lg rounded cursor-pointer">
@@ -12,9 +12,9 @@ const Post = ({ post }) => {
         <h3 className="mt-4 mb-2 font-bold hover:text-blue-600 cursor-pointer">
           {post.title}
         </h3>{" "}
-        <p dangerouslySetInnerHTML={{__html:post.content.substring(0,15) + "....."}}></p>
-        <p className="mb-2  text-gray-600">
-          <FaUser className="inline-flex items-center mr-2" />
+        {/* <p dangerouslySetInnerHTML={{__html:post.content.substring(0,15) + "....."}}></p> */}
+        <p className="pb-2  text-gray-600">
+          <FaUser className="inline-flex  items-center mr-2" /><span className=" mt-1">{post.user.name}</span>
         </p>
         <p className=" text-sm text-gray-500">Published:</p>{" "}
         {/* {post.title} */}
