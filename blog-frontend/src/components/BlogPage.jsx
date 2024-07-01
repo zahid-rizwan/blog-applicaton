@@ -2,7 +2,7 @@
 // import blogData from "../model/BlogData";
 // import BlogCards from "./BlogCards";
 import React from "react";
-// import CategorySelecton from "./CategorySelecton";
+import CategorySelecton from "./CategorySelecton";
 import SideBar from "./SideBar";
 // import { loadAllPosts } from "../services/psot-service";
 import NewFeed from "./NewFeed";
@@ -69,13 +69,13 @@ const BlogPage = () => {
   return (
     <div>
       <div>
-        {/* <CategorySelecton
-          onSelectCategory={handleCategoryChange}
-          selectedCategory={selectedCategory}
-          activeCategory={activeCategory}
-        /> */}
+        <CategorySelecton
+          // onSelectCategory={handleCategoryChange}
+          // selectedCategory={selectedCategory}
+          // activeCategory={activeCategory}
+        />
       </div>
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col mt-5 pt-2 lg:flex-row gap-8">
         <NewFeed
         postContent={postContent}
         setPostContent={setPostContent}

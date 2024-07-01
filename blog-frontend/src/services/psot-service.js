@@ -19,3 +19,17 @@ export const loadAllPosts=(pageNumber,pageSize)=>{
  export const createComment=(comment,postId)=>{
     return privateAxios.post(`/api/post/${postId}/comments`,comment)
  }
+
+ export const uploadPostImage=(image,postId)=>{
+    let formData=new FormData()
+    formData.append("image",image);
+    return privateAxios.post(`/api/post/image/upload/${postId}`,formData,{
+        headers:{
+            'Content-Type':'multipart/form-data'
+        }
+    }).then((response)=>{response.data})
+ }
+
+ export const loadPostCategorywise = (categoryId) =>{
+    return privateAxios.get(`/api/category/${categoryId}/posts`).then(response=>response.data)
+ }

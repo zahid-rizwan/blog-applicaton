@@ -16,7 +16,7 @@ const NewFeed = ({ postContent,setPostContent,currentPage,setCurrentPage }) => {
     hasMore={postContent.lastPage}
    
     >
-      <div className="grid p-1 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
+      <div className="grid p-1  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
       {postContent.content.map((post, index) => (
         
         <Post post={post} key={index} />

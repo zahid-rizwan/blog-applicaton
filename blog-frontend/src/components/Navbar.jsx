@@ -33,7 +33,7 @@ const Navbar = () => {
         <a href="/" className="text-xl font-bold text-white">
           Blog <span className="text-blue-500">ZD</span>
         </a>
-        {/* navbar for large devices */}
+      
         <ul className="md:flex gap-12 text-lg hidden">
           {navItems.map(({ path, link }) => (
             <li className="text-white" key={path}>
@@ -48,8 +48,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        {/* menu icons
-         */}
+     
         <div className="text-white lg:flex gap-4 items-center hidden">
           <a href="/" className="hover:text-orange-500">
             <FaFacebook />

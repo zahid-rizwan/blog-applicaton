@@ -16,6 +16,7 @@ import SignUp from './pages/SignUp.jsx';
 import { ToastContainer } from 'react-toastify';
 import DashBoard from './pages/DashBoard.jsx';
 import PostPage from './components/PostPage.jsx';
+import Category from './components/Category.jsx';
 
 const router = createHashRouter([ // Use createHashRouter instead of createBrowserRouter
   {
@@ -53,6 +54,10 @@ const router = createHashRouter([ // Use createHashRouter instead of createBrows
       {
         path:"/post/:postId",
         element:<PostPage/>
+      },
+      {
+        path:"/categories/:categoryId",
+        element:<Category/>
       },
       
       

@@ -63,7 +63,7 @@ const PostPage = () => {
             {post.title}
           </h5>
           <div>
-            <img src={BASE_URL + "/post/image/" + post.imageName} alt="" />
+            <img src={BASE_URL + "/api/post/image/" + post.imageName} alt="" />
           </div>
           <p
             className="font-normal  text-gray-700 dark:text-gray-400 "
