@@ -7,7 +7,7 @@ import SideBar from "./SideBar";
 // import { loadAllPosts } from "../services/psot-service";
 import NewFeed from "./NewFeed";
 
-import { loadAllPosts } from "../services/psot-service";
+import { loadAllPosts } from "../services/post-service";
 
 import { useState, useEffect } from "react";
 import { Pagination } from "./Pagination";

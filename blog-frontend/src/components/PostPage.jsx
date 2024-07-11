@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { createComment, loadPost } from "../services/psot-service";
+import { createComment, loadPost } from "../services/post-service";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../services/helper";
 import { isLoggedIn } from "../auth";

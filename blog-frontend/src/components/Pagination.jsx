@@ -1,5 +1,5 @@
 import React from "react";
-import { loadAllPosts } from "../services/psot-service";
+import { loadAllPosts } from "../services/post-service";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Button, IconButton } from "@material-tailwind/react";

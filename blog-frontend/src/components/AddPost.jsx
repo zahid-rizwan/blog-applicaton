@@ -9,7 +9,7 @@ import {
 import { loadAllCategories } from "../services/category-service";
 import { useEffect, useRef, useState } from "react";
 import JoditEditor from "jodit-react";
-import { createPost as doCreatePost, uploadPostImage } from "../services/psot-service";
+import { createPost as doCreatePost, uploadPostImage } from "../services/post-service";
 import { getCurrentUser } from "../auth";
 import { toast } from "react-toastify";
 

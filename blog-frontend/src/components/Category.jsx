@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CategorySelecton from "./CategorySelecton";
 import Banner from "./Banner";
-import { loadPostCategorywise } from "../services/psot-service";
+import { loadPostCategorywise } from "../services/post-service";
 import NewFeed from "./NewFeed";
 
 const Category = () => {

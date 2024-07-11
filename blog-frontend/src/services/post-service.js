@@ -33,3 +33,11 @@ export const loadAllPosts=(pageNumber,pageSize)=>{
  export const loadPostCategorywise = (categoryId) =>{
     return privateAxios.get(`/api/category/${categoryId}/posts`).then(response=>response.data)
  }
+
+ export const  loadPostUserWise = (userId)=>{
+    return privateAxios.get(`/api/user/${userId}/posts`).then(resp=>resp.data)
+ }
+
+ export const deletePostService = (postId) =>{
+    return privateAxios.delete(`/api/posts/${postId}`).then(resp=>resp.data)
+ }
