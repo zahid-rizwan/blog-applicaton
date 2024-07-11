@@ -18,7 +18,7 @@ function App() {
     <Navbar/>
     <Outlet/>
     <FooterWithLogo/>
-    </>
+</>
   )
 }
 

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa6";
 import { getCurrentUser, isLoggedIn } from "../auth";
 import { Button } from "@material-tailwind/react";
+import userContext from "./Context/userContext";
 const Post = ({ post ,deletePost}) => {
   // console.log(post.user.name)
   const [user,setUser] = useState({})
   const [login,setLogin] = useState(false)
+  const userContextData = useContext(userContext);
   useEffect(()=>{
     setUser(getCurrentUser());
     setLogin(isLoggedIn());
@@ -30,7 +32,7 @@ const Post = ({ post ,deletePost}) => {
 
       {/* {post.content.substring(0,20)}.... */}
       </Link>
-      {isLoggedIn && (user && user.id==post.user.id ? <Button onClick={()=>deletePost(post)} color="red">Delete</Button>: '')}
+      {userContextData.user.login && (user && user.id==post.user.id ? <Button onClick={()=>deletePost(post)} color="red">Delete</Button>: '')}
       </div>
 
       

@@ -55,7 +55,7 @@ const BlogPage = () => {
   
 
   useEffect(() => {
-    loadAllPosts(0, 2)
+    loadAllPosts(0, 5)
       .then((data) => {
         console.log(data);
         setPostContent(data);

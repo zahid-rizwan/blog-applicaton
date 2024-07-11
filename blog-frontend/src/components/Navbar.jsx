@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaFacebook, FaXTwitter, FaXmark } from "react-icons/fa6";
 import { doLogout, getCurrentUser, isLoggedIn } from "../auth";
+import userContext from "./Context/userContext";
 
 const Navbar = () => {
+
+  const userContextData=useContext(userContext)
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,6 +28,10 @@ const Navbar = () => {
   const logout = () => {
     doLogout(() => {
       setLogin(false);
+      userContextData.setUser({
+        data:{},
+        login:false
+      })
       navigate("/");
     });
   };
