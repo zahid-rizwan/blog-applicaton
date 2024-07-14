@@ -33,6 +33,7 @@ const Post = ({ post ,deletePost}) => {
       {/* {post.content.substring(0,20)}.... */}
       </Link>
       {userContextData.user.login && (user && user.id==post.user.id ? <Button onClick={()=>deletePost(post)} color="red">Delete</Button>: '')}
+      <Link to={`/user/update-blog/${post.id}`}>{userContextData.user.login && (user && user.id==post.user.id ? <Button className="ml-2"   color="blue">Update</Button>: '')}</Link>
       </div>
 
       

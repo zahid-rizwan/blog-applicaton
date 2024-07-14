@@ -15,6 +15,8 @@ import DashBoard from './pages/DashBoard.jsx';
 import PostPage from './components/PostPage.jsx';
 import Category from './components/Category.jsx';
 import UserProvider from './components/Context/UserProvider'; // Import UserProvider
+import UpdateBlog from './pages/UpdateBlog.jsx';
+import PrivateRoute from './pages/PrivateRoute.jsx';
 
 const router = createHashRouter([ 
   {
@@ -61,11 +63,15 @@ const router = createHashRouter([
   },
   {
     path: "/user",
-    element: <DashBoard />,
+    element:<PrivateRoute/> ,
     children: [
       {
         path: "/user/dashboard",
         element: <DashBoard />
+      },
+      {
+        path: "/user/update-blog/:blogId",
+        element: <UpdateBlog/>
       }
     ]
   }
