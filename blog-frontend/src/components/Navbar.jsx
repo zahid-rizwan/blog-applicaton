@@ -75,7 +75,7 @@ const Navbar = () => {
                   Log out
                 </button>
               </NavLink>
-              {user.email}
+              {user?.email}
             </>
           )}
           {!login && (
@@ -130,7 +130,7 @@ const Navbar = () => {
                     Log out
                   </button>
                 </NavLink>
-                {user.email}
+                {user?.email}
               </>
             )}
             {!login && (

@@ -16,7 +16,7 @@ const DashBoard = () => {
     
   }, []);
   const loadPostData = () =>{
-    loadPostUserWise(getCurrentUser().id)
+    loadPostUserWise(getCurrentUser()?.id)
       .then((data) => {
         console.log(data);
         setPosts([...data]);

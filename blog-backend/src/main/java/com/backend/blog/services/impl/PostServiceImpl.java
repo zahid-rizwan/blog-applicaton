@@ -2,6 +2,7 @@ package com.backend.blog.services.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -56,9 +57,13 @@ public class PostServiceImpl implements PostService {
     public PostDto updatePost(PostDto postDto, Integer postId) {
         Post post = this.postRepo.findById(postId)
                 .orElseThrow(() -> new ResourceNotFoundException("Post", "Post id", postId));
+
+            Category category = this.categoryRepo.findById(postDto.getCategory().getCategoryId()).orElseThrow(()-> new ResourceNotFoundException("Post", "Post id", postId));
             post.setTitle(postDto.getTitle());
             post.setContent(postDto.getContent());
             post.setImageName(postDto.getImageName());
+            post.setCategory(category);
+
             Post updatedPost = this.postRepo.save(post);
             return this.modelMapper.map(updatedPost, PostDto.class);
     }
