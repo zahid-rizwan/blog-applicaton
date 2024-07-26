@@ -53,6 +53,11 @@ public class UserServiceImmpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
         return this.userToDto(user);
     }
+    @Override
+    public UserDto getUserByEmail(String email) {
+        User user = this.userRepo.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("User", "email", 5));
+        return this.userToDto(user);
+    }
 
     @Override
     public List<UserDto> getAllUsers() {
