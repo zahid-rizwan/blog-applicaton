@@ -28,6 +28,7 @@ import com.backend.blog.security.JwtAuthenticationFilter;
 public class SecurityConfig {
     public static final String[] PUBLIC_URLS={
         "/api/auth/register",
+            "/forgotPassword/**",
         "/api/auth/**",
         "/v3/api-docs",
         "/v2/api-docs",
