@@ -1,19 +1,23 @@
 package com.backend.blog.controllers;
 
 import com.backend.blog.entities.ForgotPassword;
+import com.backend.blog.entities.User;
 import com.backend.blog.payloads.MailBody;
 import com.backend.blog.payloads.UserDto;
 import com.backend.blog.repositories.ForgotPasswordRepo;
 import com.backend.blog.services.UserService;
 import com.backend.blog.services.impl.EmailServices;
+import com.backend.blog.services.utils.ChangePassword;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -21,7 +25,7 @@ import java.util.logging.Logger;
 @RequestMapping("/forgotPassword")
 public class ForgotController {
 
-//    private static final Logger logger = Logger.getLogger(ForgotController.class.getName());
+  private static final Logger logger = Logger.getLogger(ForgotController.class.getName());
 
     @Autowired
     private UserService userService;
@@ -29,7 +33,8 @@ public class ForgotController {
     private EmailServices emailServices;
     @Autowired
     private ForgotPasswordRepo forgotPasswordRepo;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @PostMapping("/verifyMail/{email}")
     public ResponseEntity<String> verifyEmail(@PathVariable String email) {
         UserDto userDto = userService.getUserByEmail(email);
@@ -46,7 +51,7 @@ public class ForgotController {
 
         ForgotPassword forgotPassword = ForgotPassword.builder()
                 .otp(otp)
-                .expirationTime(new Date(System.currentTimeMillis() + 70 * 1000))
+                .expirationTime(new Date(System.currentTimeMillis() + 700 * 1000))
                 .user(userService.dtoToUser(userDto))
                 .build();
 
@@ -56,6 +61,35 @@ public class ForgotController {
         return ResponseEntity.ok("Email sent for verification");
     }
 
+    @PostMapping("/verifyOtp/{otp}/{email}")
+    public ResponseEntity<String> otp(@PathVariable String email, @PathVariable Integer otp) {
+        UserDto userDto = userService.getUserByEmail(email);
+        System.out.println(userDto.getName());
+
+       ForgotPassword forgotPassword = forgotPasswordRepo.findByOtpAndUser(otp,userService.dtoToUser(userDto))
+               .orElseThrow(()->new UsernameNotFoundException("please provide valid email address"));
+
+       if(forgotPassword.getExpirationTime().before(Date.from(Instant.now()))){
+           forgotPasswordRepo.deleteById(forgotPassword.getFpid());
+           return new ResponseEntity<>("OTP has expired", HttpStatus.EXPECTATION_FAILED);
+       }
+      return ResponseEntity.ok("otp is verified");
+    }
+    @PostMapping("/changePassword/{email}")
+    public ResponseEntity<String> changePasswordHandler(
+            @RequestBody ChangePassword changePassword,
+            @PathVariable String email) {
+
+        if (!Objects.equals(changePassword.password(), changePassword.repeatPassword())) {
+            return new ResponseEntity<>("please enter the password again!", HttpStatus.EXPECTATION_FAILED);
+        }
+        UserDto userDto = userService.getUserByEmail(email);
+        String encodedPassword = passwordEncoder.encode(changePassword.password());
+        userDto.setPassword(encodedPassword);
+        userService.updateUser(userDto, userDto.getId());
+
+        return ResponseEntity.ok("password has successfully changed");
+    }
     private Integer otpGenerator() {
         Random random = new Random();
         return random.nextInt(100_000, 999_999);
