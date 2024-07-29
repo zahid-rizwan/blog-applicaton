@@ -79,14 +79,16 @@ public class ForgotController {
     public ResponseEntity<String> changePasswordHandler(
             @RequestBody ChangePassword changePassword,
             @PathVariable String email) {
-
+        UserDto userDto = userService.getUserByEmail(email);
+        ForgotPassword forgotPassword = forgotPasswordRepo.findByUser(userService.dtoToUser(userDto))
+                .orElseThrow(()->new UsernameNotFoundException("please provide valid email address"));
         if (!Objects.equals(changePassword.password(), changePassword.repeatPassword())) {
             return new ResponseEntity<>("please enter the password again!", HttpStatus.EXPECTATION_FAILED);
         }
-        UserDto userDto = userService.getUserByEmail(email);
         String encodedPassword = passwordEncoder.encode(changePassword.password());
         userDto.setPassword(encodedPassword);
         userService.updateUser(userDto, userDto.getId());
+        forgotPasswordRepo.deleteById(forgotPassword.getFpid());
 
         return ResponseEntity.ok("password has successfully changed");
     }
